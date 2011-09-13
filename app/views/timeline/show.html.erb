@@ -4,12 +4,13 @@
     <%= submit_tag 'Update', :disable_with => 'Updating...' %>
   <% end %>
 
+<%= will_paginate @friends%>
   <% @friends.each do |friend|  %>
 
     <li class="clearfix">
       <div class="avatar">
         <fb:profile-pic uid="<%= friend.identifier %>" linked="true" size="small"></fb:profile-pic>
-        <strong><fb:name uid="<%= friend.identifier %>"></fb:name></strong>
+        <fb:name uid="<%= friend.identifier %>"></fb:name>
       </div>
     </li>
 

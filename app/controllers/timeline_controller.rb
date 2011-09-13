@@ -10,8 +10,9 @@ class TimelineController < ApplicationController
         gen_filter = 'male'
     end
    @friends2 = current_user.profile.friends(:fields =>"name,id,gender,relationship_status",:access_token => current_user.profile.access_token)
-   @friends = @friends2.find_all { |obj| obj.gender == gen_filter and obj.relationship_status != "Married" and obj.relationship_status != 'In a Relationship'}
-    
+    debugger
+   @friends = @friends2.find_all { |obj| obj.gender == gen_filter && obj.relationship_status != "Married" && obj.relationship_status != 'In a Relationship'}
+   @friends = @friends.paginate(:page=>params[:page],:per_page => 4)
   end
 
   def create

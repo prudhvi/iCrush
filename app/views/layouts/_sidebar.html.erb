@@ -1,12 +1,17 @@
-<div class="avatar">
-  <fb:profile-pic uid="<%= current_user.try(:identifier) %>" size="normal" facebook-logo="true"></fb:profile-pic>
-</div>
+  <div class="avatar">
+ <% if authenticated? %>
 
+<fb:profile-pic uid="<%= current_user.try(:identifier) %>" size="normal" facebook-logo="true"></fb:profile-pic>
+
+ <%else%>
+  <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/50552_114695751918461_5481_n.jpg"/>
+
+ <%end%>
+   </div>
 <% if authenticated? %>
   <p><%= link_to "Logout", facebook_path, :method => :delete %></p>
 <% else %>
   <dl>
-    <dt>JavaScript SDK</dt>
     <dd><fb:login-button length="long" onlogin="location.href = '<%= facebook_path %>'" perms="<%= Facebook.config[:perms] %>"></fb:login-button></dd>
   </dl>
 <% end %>
